@@ -1,8 +1,9 @@
 /*BEGIN Xbox One Controller Styling*/
 .controller.xbox {
-    background: url(basemod.png);
-    height: 630px;
-    width: 750px;
+    background: url(basemod2.png);
+    height: 406px;
+    width: 556px;
+    background-size: 556px 406px;
     /*    margin-left: -375px;
         margin-top: -285px;*/
 }
