@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Position Helper - Razer Wolverine V3 Pro</title>
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CSS Position Helper - Razer Wolverine V3 Pro</title>
+        <style>
         * {
             margin: 0;
             padding: 0;
@@ -187,39 +187,40 @@
             width: 100%;
         }
     </style>
-</head>
-<body>
-    <div class="sidebar">
-        <h1>🎮 CSS Position Helper</h1>
-        
-        <div class="instructions">
-            <strong>How to use:</strong><br>
-            1. Click a button group below<br>
-            2. Click on the controller to set position<br>
-            3. Repeat for all button groups<br>
-            4. Copy the CSS code for gamepadviewer.com
+    </head>
+    <body>
+        <div class="sidebar">
+            <h1>🎮 CSS Position Helper</h1>
+
+            <div class="instructions">
+                <strong>How to use:</strong><br>
+                1. Click a button group below<br>
+                2. Click on the controller to set position<br>
+                3. Repeat for all button groups<br>
+                4. Copy the CSS code for gamepadviewer.com
+            </div>
+
+            <ul class="button-list" id="buttonList"></ul>
+
+            <div class="output">
+                <h3>CSS Output (RazorStyle.css)</h3>
+                <textarea id="cssOutput" readonly></textarea>
+                <button class="copy-btn" onclick="copyCSS()">Copy CSS
+                    Code</button>
+            </div>
         </div>
-        
-        <ul class="button-list" id="buttonList"></ul>
-        
-        <div class="output">
-            <h3>CSS Output (RazorStyle.css)</h3>
-            <textarea id="cssOutput" readonly></textarea>
-            <button class="copy-btn" onclick="copyCSS()">Copy CSS Code</button>
+
+        <div class="canvas-container">
+            <div class="controls">
+                <button onclick="toggleOverlays()">Toggle Overlays</button>
+                <button onclick="resetPositions()">Reset All</button>
+            </div>
+            <div id="canvas">
+                <div class="controller-preview"></div>
+            </div>
         </div>
-    </div>
-    
-    <div class="canvas-container">
-        <div class="controls">
-            <button onclick="toggleOverlays()">Toggle Overlays</button>
-            <button onclick="resetPositions()">Reset All</button>
-        </div>
-        <div id="canvas">
-            <div class="controller-preview"></div>
-        </div>
-    </div>
-    
-    <script>
+
+        <script>
         // Button groups with CSS positioning
         const buttonGroups = {
             'trigger-left': { 
@@ -525,5 +526,5 @@
         // Initialize CSS output
         updateCSSOutput();
     </script>
-</body>
+    </body>
 </html>

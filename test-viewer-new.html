@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Razer Wolverine V3 Pro - Controller Test</title>
-    <link rel="stylesheet" href="RazorStyle.css">
-    <style>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Razer Wolverine V3 Pro - Controller Test</title>
+        <link rel="stylesheet" href="RazorStyle.css">
+        <style>
         body {
             background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
             display: flex;
@@ -107,84 +107,89 @@
             margin: 5px 0;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🎮 Razer Wolverine V3 Pro Controller Test</h1>
-        
-        <div id="status" class="status disconnected">
-            <strong>Status:</strong> <span id="status-text">No controller connected</span>
-        </div>
-        
-        <div id="controller-display">
-            <div class="controller xbox">
-                <!-- Triggers -->
-                <div class="triggers">
-                    <div class="trigger left"></div>
-                    <div class="trigger right"></div>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🎮 Razer Wolverine V3 Pro Controller Test</h1>
+
+            <div id="status" class="status disconnected">
+                <strong>Status:</strong> <span id="status-text">No controller
+                    connected</span>
+            </div>
+
+            <div id="controller-display">
+                <div class="controller xbox">
+                    <!-- Triggers -->
+                    <div class="triggers">
+                        <div class="trigger left"></div>
+                        <div class="trigger right"></div>
+                    </div>
+
+                    <!-- Bumpers -->
+                    <div class="bumpers">
+                        <div class="bumper left"></div>
+                        <div class="bumper right"></div>
+                    </div>
+
+                    <!-- Quadrant/Player Indicator -->
+                    <div class="quadrant p0"></div>
+
+                    <!-- Start/Select (View/Menu) -->
+                    <div class="arrows">
+                        <div class="back"></div>
+                        <div class="start"></div>
+                    </div>
+
+                    <!-- Face Buttons (ABXY) -->
+                    <div class="abxy">
+                        <div class="button a"></div>
+                        <div class="button b"></div>
+                        <div class="button x"></div>
+                        <div class="button y"></div>
+                    </div>
+
+                    <!-- Analog Sticks -->
+                    <div class="sticks">
+                        <div class="stick left"></div>
+                        <div class="stick right"></div>
+                    </div>
+
+                    <!-- D-Pad -->
+                    <div class="dpad">
+                        <div class="face up"></div>
+                        <div class="face down"></div>
+                        <div class="face left"></div>
+                        <div class="face right"></div>
+                    </div>
                 </div>
-                
-                <!-- Bumpers -->
-                <div class="bumpers">
-                    <div class="bumper left"></div>
-                    <div class="bumper right"></div>
+            </div>
+
+            <div class="controls">
+                <button onclick="connectController()">Connect
+                    Controller</button>
+                <button onclick="toggleChromaKey('green')">Green Screen</button>
+                <button onclick="toggleChromaKey('blue')">Blue Screen</button>
+                <button onclick="toggleChromaKey('none')">Transparent
+                    BG</button>
+            </div>
+
+            <div class="info-panel">
+                <div id="controller-info">
+                    <p>Press any button on your controller to test...</p>
                 </div>
-                
-                <!-- Quadrant/Player Indicator -->
-                <div class="quadrant p0"></div>
-                
-                <!-- Start/Select (View/Menu) -->
-                <div class="arrows">
-                    <div class="back"></div>
-                    <div class="start"></div>
+                <div id="buttons-pressed" style="margin-top: 10px;">
+                    <strong>Buttons:</strong> <span id="button-list">None</span>
                 </div>
-                
-                <!-- Face Buttons (ABXY) -->
-                <div class="abxy">
-                    <div class="button a"></div>
-                    <div class="button b"></div>
-                    <div class="button x"></div>
-                    <div class="button y"></div>
-                </div>
-                
-                <!-- Analog Sticks -->
-                <div class="sticks">
-                    <div class="stick left"></div>
-                    <div class="stick right"></div>
-                </div>
-                
-                <!-- D-Pad -->
-                <div class="dpad">
-                    <div class="face up"></div>
-                    <div class="face down"></div>
-                    <div class="face left"></div>
-                    <div class="face right"></div>
+                <div id="stick-info" style="margin-top: 10px;">
+                    <div class="stick-values"><strong>Left Stick:</strong> <span
+                            id="left-stick">X: 0.00, Y: 0.00</span></div>
+                    <div class="stick-values"><strong>Right Stick:</strong>
+                        <span id="right-stick">X: 0.00, Y: 0.00</span></div>
                 </div>
             </div>
         </div>
-        
-        <div class="controls">
-            <button onclick="connectController()">Connect Controller</button>
-            <button onclick="toggleChromaKey('green')">Green Screen</button>
-            <button onclick="toggleChromaKey('blue')">Blue Screen</button>
-            <button onclick="toggleChromaKey('none')">Transparent BG</button>
-        </div>
-        
-        <div class="info-panel">
-            <div id="controller-info">
-                <p>Press any button on your controller to test...</p>
-            </div>
-            <div id="buttons-pressed" style="margin-top: 10px;">
-                <strong>Buttons:</strong> <span id="button-list">None</span>
-            </div>
-            <div id="stick-info" style="margin-top: 10px;">
-                <div class="stick-values"><strong>Left Stick:</strong> <span id="left-stick">X: 0.00, Y: 0.00</span></div>
-                <div class="stick-values"><strong>Right Stick:</strong> <span id="right-stick">X: 0.00, Y: 0.00</span></div>
-            </div>
-        </div>
-    </div>
-    
-    <script>
+
+        <script>
         let controller = null;
         let animationFrame = null;
         
@@ -372,5 +377,5 @@
             }, 500);
         });
     </script>
-</body>
+    </body>
 </html>
