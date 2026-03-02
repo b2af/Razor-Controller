@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razer Wolverine V3 Pro - Controller Test</title>
+    <link rel="stylesheet" href="RazorStyle.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #fff;
+        }
+        
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #44D62C;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(68, 214, 44, 0.5);
+        }
+        
+        .status {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .status.connected {
+            background: rgba(68, 214, 44, 0.2);
+            border: 2px solid #44D62C;
+        }
+        
+        .status.disconnected {
+            background: rgba(231, 76, 60, 0.2);
+            border: 2px solid #E74C3C;
+        }
+        
+        #controller-display {
+            margin: 30px 0;
+        }
+        
+        .controller.xbox {
+            margin: 0 auto;
+        }
+        
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        button {
+            background: #44D62C;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background: #7FD157;
+            transform: scale(1.05);
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        .info-panel {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            max-width: 600px;
+            text-align: left;
+            color: #ccc;
+        }
+        
+        .button-state {
+            display: inline-block;
+            padding: 3px 8px;
+            margin: 2px;
+            background: rgba(68, 214, 44, 0.2);
+            border-radius: 3px;
+            font-size: 12px;
+        }
+        
+        .stick-values {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Razer Wolverine V3 Pro Controller Test</h1>
+        
+        <div id="status" class="status disconnected">
+            <strong>Status:</strong> <span id="status-text">No controller connected</span>
+        </div>
+        
+        <div id="controller-display">
+            <div class="controller xbox">
+                <!-- Triggers -->
+                <div class="triggers">
+                    <div class="trigger left"></div>
+                    <div class="trigger right"></div>
+                </div>
+                
+                <!-- Bumpers -->
+                <div class="bumpers">
+                    <div class="bumper left"></div>
+                    <div class="bumper right"></div>
+                </div>
+                
+                <!-- Quadrant/Player Indicator -->
+                <div class="quadrant p0"></div>
+                
+                <!-- Start/Select (View/Menu) -->
+                <div class="arrows">
+                    <div class="back"></div>
+                    <div class="start"></div>
+                </div>
+                
+                <!-- Face Buttons (ABXY) -->
+                <div class="abxy">
+                    <div class="button a"></div>
+                    <div class="button b"></div>
+                    <div class="button x"></div>
+                    <div class="button y"></div>
+                </div>
+                
+                <!-- Analog Sticks -->
+                <div class="sticks">
+                    <div class="stick left"></div>
+                    <div class="stick right"></div>
+                </div>
+                
+                <!-- D-Pad -->
+                <div class="dpad">
+                    <div class="face up"></div>
+                    <div class="face down"></div>
+                    <div class="face left"></div>
+                    <div class="face right"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button onclick="connectController()">Connect Controller</button>
+            <button onclick="toggleChromaKey('green')">Green Screen</button>
+            <button onclick="toggleChromaKey('blue')">Blue Screen</button>
+            <button onclick="toggleChromaKey('none')">Transparent BG</button>
+        </div>
+        
+        <div class="info-panel">
+            <div id="controller-info">
+                <p>Press any button on your controller to test...</p>
+            </div>
+            <div id="buttons-pressed" style="margin-top: 10px;">
+                <strong>Buttons:</strong> <span id="button-list">None</span>
+            </div>
+            <div id="stick-info" style="margin-top: 10px;">
+                <div class="stick-values"><strong>Left Stick:</strong> <span id="left-stick">X: 0.00, Y: 0.00</span></div>
+                <div class="stick-values"><strong>Right Stick:</strong> <span id="right-stick">X: 0.00, Y: 0.00</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let controller = null;
+        let animationFrame = null;
+        
+        // Gamepad API connection
+        window.addEventListener('gamepadconnected', (e) => {
+            controller = e.gamepad;
+            document.getElementById('status').className = 'status connected';
+            document.getElementById('status-text').textContent = `Connected: ${controller.id}`;
+            document.getElementById('controller-info').innerHTML = `
+                <p><strong>ID:</strong> ${controller.id}</p>
+                <p><strong>Buttons:</strong> ${controller.buttons.length}</p>
+                <p><strong>Axes:</strong> ${controller.axes.length}</p>
+            `;
+            startPolling();
+        });
+        
+        window.addEventListener('gamepaddisconnected', (e) => {
+            controller = null;
+            document.getElementById('status').className = 'status disconnected';
+            document.getElementById('status-text').textContent = 'Controller disconnected';
+            stopPolling();
+            clearAllButtons();
+        });
+        
+        function connectController() {
+            const gamepads = navigator.getGamepads();
+            for (let i = 0; i < gamepads.length; i++) {
+                if (gamepads[i]) {
+                    controller = gamepads[i];
+                    document.getElementById('status').className = 'status connected';
+                    document.getElementById('status-text').textContent = `Connected: ${controller.id}`;
+                    document.getElementById('controller-info').innerHTML = `
+                        <p><strong>ID:</strong> ${controller.id}</p>
+                        <p><strong>Buttons:</strong> ${controller.buttons.length}</p>
+                        <p><strong>Axes:</strong> ${controller.axes.length}</p>
+                    `;
+                    startPolling();
+                    return;
+                }
+            }
+            alert('No controller detected. Please connect your Razer Wolverine V3 Pro and press any button on it.');
+        }
+        
+        function startPolling() {
+            if (!animationFrame) {
+                pollGamepad();
+            }
+        }
+        
+        function stopPolling() {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+                animationFrame = null;
+            }
+        }
+        
+        function clearAllButtons() {
+            const buttons = document.querySelectorAll('.button, .bumper, .trigger, .face, .stick, .back, .start');
+            buttons.forEach(btn => btn.classList.remove('pressed'));
+        }
+        
+        // Button mapping for Xbox-style controllers
+        const buttonElements = [
+            '.button.a',      // 0 - A
+            '.button.b',      // 1 - B
+            '.button.x',      // 2 - X
+            '.button.y',      // 3 - Y
+            '.bumper.left',   // 4 - LB
+            '.bumper.right',  // 5 - RB
+            '.trigger.left',  // 6 - LT
+            '.trigger.right', // 7 - RT
+            '.back',          // 8 - View/Back
+            '.start',         // 9 - Menu/Start
+            '.stick.left',    // 10 - L3
+            '.stick.right',   // 11 - R3
+            '.face.up',       // 12 - DPad Up
+            '.face.down',     // 13 - DPad Down
+            '.face.left',     // 14 - DPad Left
+            '.face.right',    // 15 - DPad Right
+            null              // 16 - Xbox button (no element for this)
+        ];
+        
+        const buttonNames = {
+            0: 'A', 1: 'B', 2: 'X', 3: 'Y',
+            4: 'LB', 5: 'RB', 6: 'LT', 7: 'RT',
+            8: 'View', 9: 'Menu', 10: 'L3', 11: 'R3',
+            12: 'D-Up', 13: 'D-Down', 14: 'D-Left', 15: 'D-Right',
+            16: 'Xbox',
+            17: 'M1', 18: 'M2', 19: 'M3', 20: 'M4', 21: 'M5', 22: 'M6'
+        };
+        
+        function pollGamepad() {
+            if (!controller) {
+                stopPolling();
+                return;
+            }
+            
+            // Update controller reference
+            const gamepads = navigator.getGamepads();
+            controller = gamepads[controller.index];
+            
+            if (!controller) {
+                stopPolling();
+                return;
+            }
+            
+            const pressedButtons = [];
+            
+            // Check buttons
+            controller.buttons.forEach((button, index) => {
+                if (index < buttonElements.length) {
+                    const selector = buttonElements[index];
+                    if (selector) {
+                        const element = document.querySelector(selector);
+                        if (element) {
+                            if (button.pressed || button.value > 0.5) {
+                                element.classList.add('pressed');
+                                pressedButtons.push(buttonNames[index] || `Btn${index}`);
+                            } else {
+                                element.classList.remove('pressed');
+                            }
+                        }
+                    }
+                } else if (button.pressed) {
+                    // Handle extra buttons (M1-M6 paddles, etc.)
+                    pressedButtons.push(buttonNames[index] || `Btn${index}`);
+                }
+            });
+            
+            // Update button display
+            document.getElementById('button-list').textContent = 
+                pressedButtons.length > 0 ? pressedButtons.join(', ') : 'None';
+            
+            // Handle analog sticks
+            const leftX = controller.axes[0] || 0;
+            const leftY = controller.axes[1] || 0;
+            const rightX = controller.axes[2] || 0;
+            const rightY = controller.axes[3] || 0;
+            
+            // Update stick values display
+            document.getElementById('left-stick').textContent = 
+                `X: ${leftX.toFixed(2)}, Y: ${leftY.toFixed(2)}`;
+            document.getElementById('right-stick').textContent = 
+                `X: ${rightX.toFixed(2)}, Y: ${rightY.toFixed(2)}`;
+            
+            // Activate stick visual if moved significantly
+            const leftStick = document.querySelector('.stick.left');
+            const rightStick = document.querySelector('.stick.right');
+            
+            if (Math.abs(leftX) > 0.1 || Math.abs(leftY) > 0.1) {
+                if (leftStick) leftStick.classList.add('pressed');
+            } else {
+                if (leftStick) leftStick.classList.remove('pressed');
+            }
+            
+            if (Math.abs(rightX) > 0.1 || Math.abs(rightY) > 0.1) {
+                if (rightStick) rightStick.classList.add('pressed');
+            } else {
+                if (rightStick) rightStick.classList.remove('pressed');
+            }
+            
+            animationFrame = requestAnimationFrame(pollGamepad);
+        }
+        
+        function toggleChromaKey(color) {
+            document.body.style.background = '';
+            if (color === 'green') {
+                document.body.style.background = '#00FF00';
+            } else if (color === 'blue') {
+                document.body.style.background = '#0000FF';
+            } else if (color === 'none') {
+                document.body.style.background = 'transparent';
+            } else {
+                document.body.style.background = 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)';
+            }
+        }
+        
+        // Auto-connect if controller already connected
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const gamepads = navigator.getGamepads();
+                if (gamepads[0]) {
+                    connectController();
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+/* Razer Wolverine V3 Pro - Custom Positions */
+
+.xbox .trigger.left {
+    top: 34px;
+    left: 132px;
+}
+
+.xbox .trigger.right {
+    top: 40px;
+    right: 175px;
+}
+
+.xbox .bumper.left {
+    top: 85px;
+    left: 135px;
+}
+
+.xbox .bumper.right {
+    top: 88px;
+    right: 100px;
+}
+
+.xbox .abxy {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    top: 171px;
+    left: 522px;
+}
+
+.xbox .a {
+    top: 275px;
+    left: 569px;
+}
+
+.xbox .b {
+    top: 223px;
+    left: 619px;
+}
+
+.xbox .x {
+    top: 217px;
+    left: 520px;
+}
+
+.xbox .y {
+    top: 166px;
+    left: 565px;
+}
+
+.xbox .dpad {
+    position: absolute;
+    width: 100px;
+    height: 120px;
+    top: 294px;
+    left: 218px;
+}
+
+.xbox .face.up {
+    top: 291px;
+    left: 249px;
+}
+
+.xbox .face.down {
+    top: 374px;
+    left: 254px;
+}
+
+.xbox .face.left {
+    top: 339px;
+    left: 212px;
+}
+
+.xbox .face.right {
+    top: 341px;
+    left: 286px;
+}
+
+.xbox .sticks {
+    position: absolute;
+    width: 450px;
+    height: 250px;
+    top: 210px;
+    left: 130px;
+}
+
+.xbox .stick.left {
+    top: 209px;
+    left: 134px;
+}
+
+.xbox .stick.right {
+    top: 329px;
+    left: 456px;
+}
+
+.xbox .arrows {
+    position: absolute;
+    width: 120px;
+    height: 30px;
+    top: 179px;
+    left: 298px;
+}
+
+.xbox .back {
+    top: 182px;
+    left: 288px;
+}
+
+.xbox .start {
+    top: 185px;
+    left: 426px;
+}
+

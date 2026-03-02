@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Position Helper - Razer Wolverine V3 Pro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+        
+        .sidebar {
+            width: 350px;
+            background: #2d2d2d;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        }
+        
+        h1 {
+            color: #44D62C;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .instructions {
+            background: rgba(68, 214, 44, 0.1);
+            border-left: 3px solid #44D62C;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .button-list {
+            list-style: none;
+        }
+        
+        .button-item {
+            background: rgba(255, 255, 255, 0.05);
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid transparent;
+        }
+        
+        .button-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .button-item.active {
+            background: rgba(68, 214, 44, 0.2);
+            border-left-color: #44D62C;
+        }
+        
+        .button-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .button-coords {
+            font-size: 11px;
+            color: #aaa;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            overflow: auto;
+            background: #0a0a0a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        #canvas {
+            position: relative;
+            cursor: crosshair;
+            width: 750px;
+            height: 630px;
+        }
+        
+        .controller-preview {
+            width: 100%;
+            height: 100%;
+            background: url('Razor\ Wolverine\ V3\ Pro\ 8K.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+        }
+        
+        .button-overlay-viz {
+            position: absolute;
+            border: 2px solid #44D62C;
+            background: rgba(68, 214, 44, 0.2);
+            pointer-events: none;
+            transition: all 0.2s;
+        }
+        
+        .button-overlay-viz.active {
+            border-color: #00FF00;
+            background: rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        
+        .button-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 3px #000;
+            pointer-events: none;
+        }
+        
+        .controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.8);
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 10;
+        }
+        
+        .controls button {
+            background: #44D62C;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        
+        .controls button:hover {
+            background: #7FD157;
+            transform: scale(1.05);
+        }
+        
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 5px;
+        }
+        
+        .output h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: #44D62C;
+        }
+        
+        .output textarea {
+            width: 100%;
+            height: 200px;
+            background: #000;
+            color: #0f0;
+            border: 1px solid #444;
+            padding: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            border-radius: 3px;
+            resize: vertical;
+        }
+        
+        .copy-btn {
+            margin-top: 5px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h1>🎮 CSS Position Helper</h1>
+        
+        <div class="instructions">
+            <strong>How to use:</strong><br>
+            1. Click a button group below<br>
+            2. Click on the controller to set position<br>
+            3. Repeat for all button groups<br>
+            4. Copy the CSS code for gamepadviewer.com
+        </div>
+        
+        <ul class="button-list" id="buttonList"></ul>
+        
+        <div class="output">
+            <h3>CSS Output (RazorStyle.css)</h3>
+            <textarea id="cssOutput" readonly></textarea>
+            <button class="copy-btn" onclick="copyCSS()">Copy CSS Code</button>
+        </div>
+    </div>
+    
+    <div class="canvas-container">
+        <div class="controls">
+            <button onclick="toggleOverlays()">Toggle Overlays</button>
+            <button onclick="resetPositions()">Reset All</button>
+        </div>
+        <div id="canvas">
+            <div class="controller-preview"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Button groups with CSS positioning
+        const buttonGroups = {
+            'trigger-left': { 
+                name: 'Left Trigger', 
+                top: 44, left: 208, 
+                width: 44, height: 44,
+                cssClass: '.xbox .trigger.left',
+                container: '.xbox .triggers'
+            },
+            'trigger-right': { 
+                name: 'Right Trigger', 
+                top: 40, right: 175, 
+                width: 44, height: 44,
+                cssClass: '.xbox .trigger.right',
+                container: '.xbox .triggers'
+            },
+            'bumper-left': { 
+                name: 'Left Bumper', 
+                top: 88, left: 192, 
+                width: 85, height: 30,
+                cssClass: '.xbox .bumper.left',
+                container: '.xbox .bumpers'
+            },
+            'bumper-right': { 
+                name: 'Right Bumper', 
+                top: 88, right: 100, 
+                width: 85, height: 30,
+                cssClass: '.xbox .bumper.right',
+                container: '.xbox .bumpers'
+            },
+            'abxy-container': { 
+                name: 'ABXY Container', 
+                top: 180, left: 505, 
+                width: 140, height: 140,
+                cssClass: '.xbox .abxy',
+                isContainer: true
+            },
+            'button-a': { 
+                name: 'A Button (within ABXY)', 
+                top: 95, left: 50, 
+                width: 40, height: 40,
+                cssClass: '.xbox .a',
+                relativeTo: 'abxy-container'
+            },
+            'button-b': { 
+                name: 'B Button (within ABXY)', 
+                top: 50, right: 5, 
+                width: 40, height: 40,
+                cssClass: '.xbox .b',
+                relativeTo: 'abxy-container'
+            },
+            'button-x': { 
+                name: 'X Button (within ABXY)', 
+                top: 55, left: 3, 
+                width: 40, height: 40,
+                cssClass: '.xbox .x',
+                relativeTo: 'abxy-container'
+            },
+            'button-y': { 
+                name: 'Y Button (within ABXY)', 
+                top: 8, left: 50, 
+                width: 40, height: 40,
+                cssClass: '.xbox .y',
+                relativeTo: 'abxy-container'
+            },
+            'dpad-container': { 
+                name: 'D-Pad Container', 
+                top: 330, left: 255, 
+                width: 100, height: 120,
+                cssClass: '.xbox .dpad',
+                isContainer: true
+            },
+            'dpad-up': { 
+                name: 'D-Pad Up (within Dpad)', 
+                top: 10, left: 33, 
+                width: 30, height: 45,
+                cssClass: '.xbox .face.up',
+                relativeTo: 'dpad-container'
+            },
+            'dpad-down': { 
+                name: 'D-Pad Down (within Dpad)', 
+                bottom: 0, left: 33, 
+                width: 30, height: 45,
+                cssClass: '.xbox .face.down',
+                relativeTo: 'dpad-container'
+            },
+            'dpad-left': { 
+                name: 'D-Pad Left (within Dpad)', 
+                top: 53, left: 0, 
+                width: 48, height: 30,
+                cssClass: '.xbox .face.left',
+                relativeTo: 'dpad-container'
+            },
+            'dpad-right': { 
+                name: 'D-Pad Right (within Dpad)', 
+                top: 53, right: 0, 
+                width: 48, height: 30,
+                cssClass: '.xbox .face.right',
+                relativeTo: 'dpad-container'
+            },
+            'sticks-container': { 
+                name: 'Sticks Container', 
+                top: 210, left: 130, 
+                width: 450, height: 250,
+                cssClass: '.xbox .sticks',
+                isContainer: true
+            },
+            'stick-left': { 
+                name: 'Left Stick (within Sticks)', 
+                top: 46, left: 78, 
+                width: 60, height: 60,
+                cssClass: '.xbox .stick.left',
+                relativeTo: 'sticks-container'
+            },
+            'stick-right': { 
+                name: 'Right Stick (within Sticks)', 
+                top: 170, left: 335, 
+                width: 60, height: 60,
+                cssClass: '.xbox .stick.right',
+                relativeTo: 'sticks-container'
+            },
+            'arrows-container': { 
+                name: 'View/Menu Container', 
+                top: 195, left: 310, 
+                width: 120, height: 30,
+                cssClass: '.xbox .arrows',
+                isContainer: true
+            },
+            'back-button': { 
+                name: 'View Button (within Arrows)', 
+                top: 0, left: 2, 
+                width: 30, height: 20,
+                cssClass: '.xbox .back',
+                relativeTo: 'arrows-container'
+            },
+            'start-button': { 
+                name: 'Menu Button (within Arrows)', 
+                top: 0, right: 0, 
+                width: 30, height: 20,
+                cssClass: '.xbox .start',
+                relativeTo: 'arrows-container'
+            }
+        };
+        
+        let activeButton = null;
+        let overlaysVisible = true;
+        
+        // Create button list
+        const buttonList = document.getElementById('buttonList');
+        Object.keys(buttonGroups).forEach(id => {
+            const btn = buttonGroups[id];
+            const li = document.createElement('li');
+            li.className = 'button-item';
+            li.dataset.id = id;
+            
+            let coordText = '';
+            if (btn.top !== undefined) coordText += `top: ${btn.top}px`;
+            if (btn.bottom !== undefined) coordText += `bottom: ${btn.bottom}px`;
+            if (btn.left !== undefined) coordText += `, left: ${btn.left}px`;
+            if (btn.right !== undefined) coordText += `, right: ${btn.right}px`;
+            
+            li.innerHTML = `
+                <div class="button-name">${btn.name}</div>
+                <div class="button-coords">${coordText}</div>
+            `;
+            li.onclick = () => selectButton(id);
+            buttonList.appendChild(li);
+            
+            // Create overlay
+            createOverlay(id);
+        });
+        
+        function createOverlay(id) {
+            const btn = buttonGroups[id];
+            const overlay = document.createElement('div');
+            overlay.className = 'button-overlay-viz';
+            overlay.id = 'overlay-' + id;
+            
+            overlay.style.width = btn.width + 'px';
+            overlay.style.height = btn.height + 'px';
+            
+            if (btn.top !== undefined) overlay.style.top = btn.top + 'px';
+            if (btn.bottom !== undefined) overlay.style.bottom = btn.bottom + 'px';
+            if (btn.left !== undefined) overlay.style.left = btn.left + 'px';
+            if (btn.right !== undefined) overlay.style.right = btn.right + 'px';
+            
+            const label = document.createElement('div');
+            label.className = 'button-label';
+            label.textContent = btn.name.split(' ')[0];
+            overlay.appendChild(label);
+            
+            document.querySelector('.controller-preview').appendChild(overlay);
+        }
+        
+        function selectButton(id) {
+            document.querySelectorAll('.button-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.button-overlay-viz').forEach(el => el.classList.remove('active'));
+            
+            document.querySelector(`[data-id="${id}"]`).classList.add('active');
+            document.getElementById('overlay-' + id).classList.add('active');
+            
+            activeButton = id;
+        }
+        
+        document.querySelector('.controller-preview').onclick = function(e) {
+            if (!activeButton) {
+                alert('Please select a button from the list first!');
+                return;
+            }
+            
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const btn = buttonGroups[activeButton];
+            const overlay = document.getElementById('overlay-' + activeButton);
+            
+            // Update position based on click
+            // For simplicity, set as top-left positioned
+            btn.top = Math.round(y - btn.height / 2);
+            btn.left = Math.round(x - btn.width / 2);
+            delete btn.bottom;
+            delete btn.right;
+            
+            overlay.style.top = btn.top + 'px';
+            overlay.style.left = btn.left + 'px';
+            overlay.style.bottom = 'auto';
+            overlay.style.right = 'auto';
+            
+            // Update list item
+            const listItem = document.querySelector(`[data-id="${activeButton}"]`);
+            listItem.querySelector('.button-coords').textContent = `top: ${btn.top}px, left: ${btn.left}px`;
+            
+            updateCSSOutput();
+        };
+        
+        function updateCSSOutput() {
+            let css = '/* Razer Wolverine V3 Pro - Custom Positions */\n\n';
+            
+            // Group by containers
+            const containers = Object.keys(buttonGroups).filter(id => buttonGroups[id].isContainer);
+            const standalone = Object.keys(buttonGroups).filter(id => !buttonGroups[id].relativeTo && !buttonGroups[id].isContainer);
+            
+            // Standalone elements
+            standalone.forEach(id => {
+                const btn = buttonGroups[id];
+                css += `${btn.cssClass} {\n`;
+                if (btn.top !== undefined) css += `    top: ${btn.top}px;\n`;
+                if (btn.bottom !== undefined) css += `    bottom: ${btn.bottom}px;\n`;
+                if (btn.left !== undefined) css += `    left: ${btn.left}px;\n`;
+                if (btn.right !== undefined) css += `    right: ${btn.right}px;\n`;
+                css += `}\n\n`;
+            });
+            
+            // Containers and their children
+            containers.forEach(containerId => {
+                const container = buttonGroups[containerId];
+                css += `${container.cssClass} {\n`;
+                css += `    position: absolute;\n`;
+                if (container.width) css += `    width: ${container.width}px;\n`;
+                if (container.height) css += `    height: ${container.height}px;\n`;
+                if (container.top !== undefined) css += `    top: ${container.top}px;\n`;
+                if (container.left !== undefined) css += `    left: ${container.left}px;\n`;
+                css += `}\n\n`;
+                
+                // Children
+                Object.keys(buttonGroups).forEach(id => {
+                    const btn = buttonGroups[id];
+                    if (btn.relativeTo === containerId) {
+                        css += `${btn.cssClass} {\n`;
+                        if (btn.top !== undefined) css += `    top: ${btn.top}px;\n`;
+                        if (btn.bottom !== undefined) css += `    bottom: ${btn.bottom}px;\n`;
+                        if (btn.left !== undefined) css += `    left: ${btn.left}px;\n`;
+                        if (btn.right !== undefined) css += `    right: ${btn.right}px;\n`;
+                        css += `}\n\n`;
+                    }
+                });
+            });
+            
+            document.getElementById('cssOutput').value = css;
+        }
+        
+        function copyCSS() {
+            const output = document.getElementById('cssOutput');
+            output.select();
+            document.execCommand('copy');
+            alert('CSS code copied to clipboard!');
+        }
+        
+        function toggleOverlays() {
+            overlaysVisible = !overlaysVisible;
+            document.querySelectorAll('.button-overlay-viz').forEach(el => {
+                el.style.display = overlaysVisible ? 'block' : 'none';
+            });
+        }
+        
+        function resetPositions() {
+            if (confirm('Reset all button positions to default?')) {
+                location.reload();
+            }
+        }
+        
+        // Initialize CSS output
+        updateCSSOutput();
+    </script>
+</body>
+</html>
