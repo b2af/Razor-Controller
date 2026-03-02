@@ -1,12 +1,10 @@
 /*BEGIN Xbox One Controller Styling*/
 .controller.xbox {
     background: url(basemod2.png);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
     height: 630px;
     width: 750px;
-    position: relative;
+    /*    margin-left: -375px;
+        margin-top: -285px;*/
 }
 
 .xbox.white {
@@ -22,48 +20,42 @@
 }
 
 .xbox .triggers {
-    width: 400px;
-    height: 60px;
+    width: 446px;
+    height: 121px;
     position: absolute;
-    left: 175px;
-    top: 20px;
+    left: 152px;
 }
 
 .xbox .trigger {
-    width: 44px;
-    height: 44px;
-    background: url(trigger.svg);
-    background-size: contain;
+    width: 88px;
+    height: 121px;
+    background: url(xbox-assets/trigger.svg);
     opacity: 0;
-    position: absolute;
 }
 
 .xbox .trigger.left {
-    left: 33px;
-    top: 24px;
+    float: left;
+    background-position: 0 0;
 }
 
 .xbox .trigger.right {
-    right: 0px;
-    top: 20px;
+    float: right;
     transform: rotateY(180deg);
 }
 
 .xbox .bumper {
-    width: 85px;
-    height: 30px;
-    background: url(bumper.svg);
-    background-size: contain;
+    width: 170px;
+    height: 61px;
+    background: url(xbox-assets/bumper.svg);
     opacity: 0;
-    position: absolute;
 }
 
 .xbox .bumpers {
     position: absolute;
-    width: 550px;
-    height: 50px;
-    left: 100px;
-    top: 88px;
+    width: 536px;
+    height: 61px;
+    left: 107px;
+    top: 129px;
 }
 
 .xbox .bumper.pressed {
@@ -71,15 +63,24 @@
 }
 
 .xbox .bumper.left {
-    left: 92px;
+    float: left;
 }
 
 .xbox .bumper.right {
-    right: 0px;
+    float: right;
     -webkit-transform: rotateY(180deg);
     transform: rotateY(180deg);
 }
 
+.xbox .quadrant {
+    position: absolute;
+    background: url(xbox-assets/quadrant.svg);
+    height: 45px;
+    width: 45px;
+    top: 258px;
+    left: 354px;
+    z-index: 0;
+}
 
 .xbox .p0 {
     -webkit-transform: rotate(0deg);
@@ -101,22 +102,19 @@
     transform: rotate(180deg);
 }
 
-
 .xbox .arrows {
     position: absolute;
-    width: 120px;
-    height: 30px;
-    top: 195px;
-    left: 310px;
+    width: 141px;
+    height: 33px;
+    top: 264px;
+    left: 306px;
 }
 
 .xbox .back, .xbox .start {
-    background: url(start-select.svg);
-    background-size: contain;
-    width: 30px;
-    height: 20px;
+    background: url(xbox-assets/start-select.svg);
+    width: 33px;
+    height: 33px;
     opacity: 0;
-    position: absolute;
 }
 
 .xbox .back.pressed, .xbox .start.pressed {
@@ -124,75 +122,73 @@
 }
 
 .xbox .back {
-    left: 2px;
+    float: left;
 }
 
 .xbox .start {
     background-position: 33px 0px;
-    right: 0px;
+    float: right;
 }
 
 .xbox .abxy {
     position: absolute;
-    width: 140px;
-    height: 140px;
-    top: 180px;
-    left: 505px;
+    width: 153px;
+    height: 156px;
+    top: 192px;
+    left: 488px;
 }
 
 .xbox .button {
     position: absolute;
-    background: url(abxy.svg);
-    background-size: 192px 96px;
-    width: 40px;
-    height: 40px;
+    background: url(xbox-assets/abxy.svg);
+    width: 48px;
+    height: 48px;
 }
 
 .xbox .button.pressed {
     background-position-y: -48px;
-    margin-top: 3px;
+    margin-top: 5px;
     opacity: 1;
 }
 
 .xbox .a {
     background-position: 0 0;
-    top: 95px;
-    left: 50px;
+    top: 108px;
+    left: 55px;
 }
 
 .xbox .b {
     background-position: -49px 0;
-    top: 50px;
-    right: 5px;
+    top: 58px;
+    right: 0px;
 }
 
 .xbox .x {
     background-position: -98px 0;
-    top: 55px;
-    left: 3px;
+    top: 58px;
+    left: 4px;
 }
 
 .xbox .y {
     background-position: 48px 0;
-    left: 50px;
-    top: 8px;
+    left: 55px;
+    top: 7px;
 }
 
 .xbox .sticks {
     position: absolute;
-    width: 450px;
-    height: 250px;
-    top: 210px;
-    left: 130px;
+    width: 371px;
+    height: 196px;
+    top: 239px;
+    left: 144px;
 }
 
 .xbox .stick {
     position: absolute;
-    background: url(stick.svg);
-    background-size: 168px 83px;
+    background: url(xbox-assets/stick.svg);
     background-position: -85px 0;
-    height: 60px;
-    width: 60px;
+    height: 83px;
+    width: 83px;
 }
 
 .xbox .stick.pressed {
@@ -200,26 +196,25 @@
 }
 
 .xbox .stick.left {
-    top: 46px;
-    left: 78px;
+    top: 0;
+    left: 0;
 }
 
 .xbox .stick.right {
-    top: 170px;
-    left: 335px;
+    top: 113px;
+    left: 288px;
 }
 
 .xbox .dpad {
     position: absolute;
-    width: 100px;
-    height: 120px;
-    top: 330px;
-    left: 255px;
+    width: 110px;
+    height: 111px;
+    top: 345px;
+    left: 223px;
 }
 
 .xbox .face {
-    background: url(dpad.svg);
-    background-size: contain;
+    background: url(xbox-assets/dpad.svg);
     position: absolute;
     opacity: 0;
 }
@@ -230,32 +225,32 @@
 
 .xbox .face.up {
     background-position: 34px 0;
-    left: 33px;
-    top: 10px;
-    width: 30px;
-    height: 45px;
+    left: 38px;
+    top: 0px;
+    width: 34px;
+    height: 56px;
 }
 
 .xbox .face.down {
-    left: 33px;
-    bottom: 0px;
-    width: 30px;
-    height: 45px;
+    left: 38px;
+    bottom: 0;
+    width: 34px;
+    height: 56px;
 }
 
 .xbox .face.left {
     background-position: 0 -93px;
-    width: 48px;
-    height: 30px;
-    top: 53px;
+    width: 55px;
+    height: 35px;
+    top: 38px;
     left: 0;
 }
 
 .xbox .face.right {
     background-position: 0 -57px;
-    width: 48px;
-    height: 30px;
-    top: 53px;
+    width: 55px;
+    height: 35px;
+    top: 38px;
     right: 0;
 }
 
