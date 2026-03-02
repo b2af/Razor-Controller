@@ -21,15 +21,15 @@
 }
 
 .xbox .triggers {
-    width: 446px;
-    height: 121px;
+    width: 330px;
+    height: 80px;
     position: absolute;
-    left: 152px;
+    left: 113px;
 }
 
 .xbox .trigger {
-    width: 88px;
-    height: 121px;
+    width: 65px;
+    height: 80px;
     background: url(xbox-assets/trigger.svg);
     opacity: 0;
 }
@@ -45,22 +45,23 @@
 }
 
 .xbox .bumper {
-    width: 170px;
-    height: 61px;
+    width: 126px;
+    height: 40px;
     background: url(xbox-assets/bumper.svg);
     opacity: 0;
 }
 
 .xbox .bumpers {
     position: absolute;
-    width: 536px;
-    height: 61px;
-    left: 107px;
-    top: 129px;
+    width: 397px;
+    height: 40px;
+    left: 79px;
+    top: 83px;
 }
 
 .xbox .bumper.pressed {
     opacity: 1;
+    background-color: rgba(0, 255, 0, 0.5);
 }
 
 .xbox .bumper.left {
@@ -96,10 +97,10 @@
 
 .xbox .arrows {
     position: absolute;
-    width: 141px;
-    height: 33px;
-    top: 264px;
-    left: 306px;
+    width: 104px;
+    height: 25px;
+    top: 170px;
+    left: 227px;
 }
 
 .xbox .back, .xbox .start {
@@ -111,6 +112,7 @@
 
 .xbox .back.pressed, .xbox .start.pressed {
     opacity: 1;
+    background-color: rgba(255, 128, 0, 0.5);
 }
 
 .xbox .back {
@@ -124,67 +126,69 @@
 
 .xbox .abxy {
     position: absolute;
-    width: 153px;
-    height: 156px;
-    top: 192px;
-    left: 488px;
+    width: 113px;
+    height: 100px;
+    top: 124px;
+    left: 362px;
 }
 
 .xbox .button {
     position: absolute;
     background: url(xbox-assets/abxy.svg);
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
 }
 
 .xbox .button.pressed {
-    background-position-y: -48px;
-    margin-top: 5px;
+    background-position-y: -36px;
+    margin-top: 3px;
     opacity: 1;
+    background-color: rgba(255, 255, 0, 0.5);
 }
 
 .xbox .a {
     background-position: 0 0;
-    top: 108px;
-    left: 55px;
+    top: 69px;
+    left: 41px;
 }
 
 .xbox .b {
-    background-position: -49px 0;
-    top: 58px;
+    background-position: -37px 0;
+    top: 37px;
     right: 0px;
 }
 
 .xbox .x {
-    background-position: -98px 0;
-    top: 58px;
-    left: 4px;
+    background-position: -74px 0;
+    top: 37px;
+    left: 3px;
 }
 
 .xbox .y {
-    background-position: 48px 0;
-    left: 55px;
-    top: 7px;
+    background-position: 36px 0;
+    left: 41px;
+    top: 5px;
 }
 
 .xbox .sticks {
     position: absolute;
-    width: 371px;
-    height: 196px;
-    top: 239px;
-    left: 144px;
+    width: 275px;
+    height: 126px;
+    top: 154px;
+    left: 107px;
 }
 
 .xbox .stick {
     position: absolute;
     background: url(xbox-assets/stick.svg);
-    background-position: -85px 0;
-    height: 83px;
-    width: 83px;
+    background-position: -62px 0;
+    height: 62px;
+    width: 62px;
 }
 
 .xbox .stick.pressed {
     background-position: 0 0;
+    background-color: rgba(0, 255, 255, 0.5);
 }
 
 .xbox .stick.left {
@@ -193,16 +197,16 @@
 }
 
 .xbox .stick.right {
-    top: 113px;
-    left: 288px;
+    top: 73px;
+    left: 213px;
 }
 
 .xbox .dpad {
     position: absolute;
-    width: 110px;
-    height: 111px;
-    top: 345px;
-    left: 223px;
+    width: 82px;
+    height: 71px;
+    top: 222px;
+    left: 165px;
 }
 
 .xbox .face {
@@ -213,6 +217,7 @@
 
 .xbox .face.pressed {
     opacity: 1;
+    background-color: rgba(255, 0, 255, 0.5);
 }
 
 .xbox .face.up {
@@ -252,6 +257,51 @@
 
 .xbox {
     background: no-repeat center;
+}
+
+/* Razer M1-M6 Paddle Buttons */
+.xbox .paddle {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+.xbox .paddle.pressed {
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.xbox .m1 {
+    top: 20px;
+    left: 50px;
+}
+
+.xbox .m2 {
+    top: 20px;
+    right: 50px;
+}
+
+.xbox .m3 {
+    top: 80px;
+    left: 30px;
+}
+
+.xbox .m4 {
+    top: 80px;
+    right: 30px;
+}
+
+.xbox .m5 {
+    top: 140px;
+    left: 20px;
+}
+
+.xbox .m6 {
+    top: 140px;
+    right: 20px;
 }
 
 /*END Xbox One Controller Styling*/
