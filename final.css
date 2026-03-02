@@ -24,20 +24,19 @@
     width: 330px;
     height: 80px;
     position: absolute;
+    
     left: 113px;
 }
 
 .xbox .trigger {
     width: 65px;
     height: 80px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 5px;
-    opacity: 0.3;
+    background: url(trigger.svg);
+    opacity: 0;
 }
 
 .xbox .trigger.pressed {
     opacity: 1;
-    background-color: rgba(255, 165, 0, 0.8);
 }
 
 .xbox .trigger.left {
@@ -53,9 +52,8 @@
 .xbox .bumper {
     width: 126px;
     height: 40px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 10px;
-    opacity: 0.3;
+    background: url(bumper.svg);
+    opacity: 0;
 }
 
 .xbox .bumpers {
@@ -68,7 +66,6 @@
 
 .xbox .bumper.pressed {
     opacity: 1;
-    background-color: rgba(150, 75, 0, 0.8);
 }
 
 .xbox .bumper.left {
@@ -111,16 +108,14 @@
 }
 
 .xbox .back, .xbox .start {
+    background: url(start-select.svg);
     width: 33px;
     height: 33px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    opacity: 0.3;
+    opacity: 0;
 }
 
 .xbox .back.pressed, .xbox .start.pressed {
     opacity: 1;
-    background-color: rgba(255, 255, 255, 0.8);
 }
 
 .xbox .back {
@@ -142,51 +137,55 @@
 
 .xbox .button {
     position: absolute;
+    background: url(abxy.svg);
     width: 36px;
     height: 36px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    opacity: 0.3;
 }
 
 .xbox .button.pressed {
+    background-position-y: -36px;
+    margin-top: 3px;
     opacity: 1;
 }
 
 .xbox .a {
+    background-position: 0 0;
     top: 69px;
     left: 41px;
 }
 
 .xbox .a.pressed {
-    background-color: rgba(0, 255, 0, 0.9);
+    background-color: rgba(0, 255, 0, 0.5);
 }
 
 .xbox .b {
+    background-position: -37px 0;
     top: 37px;
     right: 0px;
 }
 
 .xbox .b.pressed {
-    background-color: rgba(255, 0, 0, 0.9);
+    background-color: rgba(255, 0, 0, 0.5);
 }
 
 .xbox .x {
+    background-position: -74px 0;
     top: 37px;
     left: 3px;
 }
 
 .xbox .x.pressed {
-    background-color: rgba(0, 100, 255, 0.9);
+    background-color: rgba(0, 100, 255, 0.5);
 }
 
 .xbox .y {
+    background-position: 36px 0;
     left: 41px;
     top: 5px;
 }
 
 .xbox .y.pressed {
-    background-color: rgba(255, 255, 0, 0.9);
+    background-color: rgba(255, 255, 0, 0.5);
 }
 
 .xbox .sticks {
@@ -199,16 +198,14 @@
 
 .xbox .stick {
     position: absolute;
+    background: url(stick.svg);
+    background-position: -62px 0;
     height: 62px;
     width: 62px;
-    border-radius: 50%;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    opacity: 0.3;
 }
 
 .xbox .stick.pressed {
-    opacity: 1;
-    background-color: rgba(0, 255, 255, 0.8);
+    background-position: 0 0;
 }
 
 .xbox .stick.left {
@@ -230,14 +227,13 @@
 }
 
 .xbox .face {
+    background: url(dpad.svg);
     position: absolute;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    opacity: 0.3;
+    opacity: 0;
 }
 
 .xbox .face.pressed {
     opacity: 1;
-    background-color: rgba(128, 128, 128, 0.8);
 }
 
 .xbox .face.up {
