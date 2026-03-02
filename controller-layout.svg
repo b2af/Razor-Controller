@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+     viewBox="0 0 1500 900" width="1500" height="900" preserveAspectRatio="xMidYMid meet">
+  <!-- Razer Wolverine V3 Pro 8K Controller Layout -->
+  <!-- Using actual controller image with interactive overlays -->
+  
+  <defs>
+    <!-- Button Press Styles -->
+    <style>
+      /* Face Buttons */
+      .face-button {
+        transition: all 100ms ease-out;
+        cursor: pointer;
+      }
+      
+      .face-button.pressed {
+        opacity: 1;
+        fill: rgba(255, 255, 255, 0.4);
+        filter: drop-shadow(0 0 12px currentColor);
+      }
+      
+      #button-a.pressed {
+        fill: #7FD157;
+        opacity: 0.6;
+        filter: drop-shadow(0 0 15px #7FD157);
+      }
+      
+      #button-b.pressed {
+        fill: #E74C3C;
+        opacity: 0.6;
+        filter: drop-shadow(0 0 15px #E74C3C);
+      }
+      
+      #button-x.pressed {
+        fill: #3498DB;
+        opacity: 0.6;
+        filter: drop-shadow(0 0 15px #3498DB);
+      }
+      
+      #button-y.pressed {
+        fill: #F4D03F;
+        opacity: 0.6;
+        filter: drop-shadow(0 0 15px #F4D03F);
+      }
+      
+      /* D-Pad */
+      .dpad-button {
+        transition: all 100ms ease-out;
+      }
+      
+      .dpad-button.pressed {
+        fill: #3498DB;
+        opacity: 0.7;
+        transform: scale(0.95);
+        filter: drop-shadow(0 0 12px #3498DB);
+      }
+      
+      /* Bumpers and Triggers */
+      .bumper.pressed,
+      .trigger.pressed {
+        fill: rgba(255, 255, 255, 0.5);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      }
+      
+      /* Back Paddles */
+      .paddle.pressed {
+        fill: #E67E22;
+        opacity: 0.8;
+        transform: scale(0.95);
+        filter: brightness(1.3) drop-shadow(0 0 12px #E67E22);
+      }
+      
+      /* Menu Buttons */
+      .menu-button.pressed {
+        fill: rgba(255, 255, 255, 0.5);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+      }
+      
+      .xbox-button.pressed {
+        fill: #44D62C;
+        opacity: 0.7;
+        filter: brightness(1.5) drop-shadow(0 0 15px #44D62C);
+      }
+      
+      /* Analog Sticks */
+      .stick.active {
+        fill: rgba(52, 152, 219, 0.5);
+        opacity: 0.8;
+        filter: drop-shadow(0 0 12px #3498DB);
+      }
+      
+      .stick-ring.active {
+        stroke: #44D62C;
+        stroke-width: 4;
+      }
+    </style>
+    
+    <!-- Glow effect for button presses -->
+    <filter id="buttonGlow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Highlight effect -->
+    <filter id="highlight">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="6"/>
+      <feOffset dx="0" dy="0" result="offsetblur"/>
+      <feFlood flood-color="#00FF00" flood-opacity="0.8"/>
+      <feComposite in2="offsetblur" operator="in"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Drop shadow for depth -->
+    <filter id="dropShadow">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Background Controller Image -->
+  <image id="controller-image" 
+         xlink:href="Razor Wolverine V3 8k.png" 
+         x="0" y="0" 
+         width="1500" height="900" 
+         preserveAspectRatio="xMidYMid meet"/>
+  
+  <!-- Interactive Button Overlays -->
+  <!-- These are positioned over the actual buttons in the image -->
+  
+  <!-- Triggers -->
+  <circle id="button-lt" cx="416" cy="63" r="28"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="trigger button-overlay" data-button="LT"/>
+
+  <circle id="button-rt" cx="1093" cy="57" r="28"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="trigger button-overlay" data-button="RT"/>
+
+  <!-- Bumpers -->
+  <rect id="button-lb" x="385" y="126" width="90" height="30" rx="4"
+        fill="rgba(255,255,255,0)" stroke="none"
+        class="bumper button-overlay" data-button="LB"/>
+
+  <rect id="button-rb" x="1025" y="119" width="90" height="30" rx="4"
+        fill="rgba(255,255,255,0)" stroke="none"
+        class="bumper button-overlay" data-button="RB"/>
+
+  <!-- D-Pad Buttons -->
+  <g id="dpad">
+    <circle id="dpad-up" cx="574" cy="486" r="20"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="dpad-button button-overlay" data-button="D-Up"/>
+
+    <circle id="dpad-down" cx="570" cy="626" r="20"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="dpad-button button-overlay" data-button="D-Down"/>
+
+    <circle id="dpad-left" cx="505" cy="558" r="20"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="dpad-button button-overlay" data-button="D-Left"/>
+
+    <circle id="dpad-right" cx="637" cy="553" r="20"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="dpad-button button-overlay" data-button="D-Right"/>
+  </g>
+
+  <!-- Center Buttons -->
+  <rect id="button-view" x="625" y="286" width="30" height="20" rx="4"
+        fill="rgba(255,255,255,0)" stroke="none"
+        class="menu-button button-overlay" data-button="View"/>
+
+  <circle id="button-xbox" cx="753" cy="195" r="50"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="xbox-button button-overlay" data-button="Xbox"/>
+
+  <rect id="button-menu" x="838" y="263" width="60" height="60" rx="4"
+        fill="rgba(255,255,255,0)" stroke="none"
+        class="menu-button button-overlay" data-button="Menu"/>
+
+  <!-- Left Analog Stick -->
+  <g id="stick-left">
+    <circle cx="416" cy="366" r="70" 
+            fill="rgba(0,0,0,0.1)" stroke="rgba(68,214,44,0.3)" stroke-width="2" 
+            class="stick-ring"/>
+    <circle id="stick-left-indicator" cx="416" cy="366" r="60"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="stick button-overlay" data-button="L3"/>
+  </g>
+
+  <!-- Right Analog Stick -->
+  <g id="stick-right">
+    <circle cx="929" cy="554" r="70" 
+            fill="rgba(0,0,0,0.1)" stroke="rgba(68,214,44,0.3)" stroke-width="2" 
+            class="stick-ring"/>
+    <circle id="stick-right-indicator" cx="929" cy="554" r="60"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="stick button-overlay" data-button="R3"/>
+  </g>
+
+  <!-- Face Buttons (A, B, X, Y) -->
+  <g id="face-buttons">
+    <circle id="button-y" cx="1089" cy="289" r="40"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="face-button button-overlay" data-button="Y"/>
+
+    <circle id="button-b" cx="1173" cy="366" r="40"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="face-button button-overlay" data-button="B"/>
+
+    <circle id="button-a" cx="1088" cy="453" r="40"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="face-button button-overlay" data-button="A"/>
+
+    <circle id="button-x" cx="1009" cy="374" r="40"
+            fill="rgba(255,255,255,0)" stroke="none"
+            class="face-button button-overlay" data-button="X"/>
+  </g>
+
+  <!-- Back Paddles (M1-M6) -->
+  <g id="back-paddles" opacity="0.7">
+    <rect id="button-m1" x="526" y="72" width="60" height="60" rx="4"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="paddle button-overlay" data-button="M1"/>
+
+    <rect id="button-m2" x="917" y="73" width="60" height="60" rx="4"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="paddle button-overlay" data-button="M2"/>
+
+    <rect id="button-m3" x="850" y="733" width="70" height="50" rx="4"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="paddle button-overlay" data-button="M3"/>
+
+    <rect id="button-m4" x="532" y="735" width="70" height="50" rx="4"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="paddle button-overlay" data-button="M4"/>
+
+    <rect id="button-m5" x="848" y="804" width="70" height="50" rx="4"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="paddle button-overlay" data-button="M5"/>
+
+    <rect id="button-m6" x="535" y="805" width="70" height="50" rx="4"
+          fill="rgba(255,255,255,0)" stroke="none"
+          class="paddle button-overlay" data-button="M6"/>
+  </g>
+  
+  <!-- Visual feedback overlays (shown when buttons are pressed) -->
+  <g id="button-highlights" pointer-events="none">
+    <!-- These will be dynamically styled via CSS/JS -->
+  </g>
+</svg>
