@@ -3,7 +3,7 @@
     background: url(basemod2.png);
     height: 406px;
     width: 556px;
-    background-size: 556px 406px;
+    background-size: 556px 400px;
     /*    margin-left: -375px;
         margin-top: -285px;*/
 }
@@ -129,10 +129,10 @@
 
 .xbox .abxy {
     position: absolute;
-    width: 113px;
-    height: 100px;
-    top: 0px;
-    left: 445px;
+    width: 150px;
+    height: 150px;
+    top: 85px;
+    left: 360px;
 }
 
 .xbox .button {
@@ -150,8 +150,8 @@
 
 .xbox .a {
     background-position: 0 0;
-    top: 68px;
-    left: 42px;
+    top: 88px;
+    left: 57px;
 }
 
 .xbox .a.pressed {
@@ -160,8 +160,8 @@
 
 .xbox .b {
     background-position: -37px 0;  
-    top: 34px;
-    right: 0px;
+    top: 50px;
+    right: 5px;
 }
 
 .xbox .b.pressed {
@@ -170,8 +170,8 @@
 
 .xbox .x {
     background-position: -74px 0;
-    top: 34px;
-    left: 4px;
+    top: 50px;
+    left: 15px;
 }
 
 .xbox .x.pressed {
@@ -180,8 +180,8 @@
 
 .xbox .y {
     background-position: 36px 0;
-    left: 42px;
-    top: 0px;
+    left: 57px;
+    top: 12px;
 }
 
 .xbox .y.pressed {
@@ -191,9 +191,9 @@
 .xbox .sticks {
     position: absolute;
     width: 275px;
-    height: 126px;
-    top: 154px;
-    left: 107px;
+    height: 150px;
+    top: 175px;
+    left: 95px;
 }
 
 .xbox .stick {
