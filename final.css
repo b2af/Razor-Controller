@@ -131,8 +131,8 @@
     position: absolute;
     width: 113px;
     height: 100px;
-    top: 0 px;
-    left: 375px;
+    top: 108px;
+    left: 395px;
 }
 
 .xbox .button {
@@ -150,8 +150,8 @@
 
 .xbox .a {
     background-position: 0 0;
-    top: 60px;
-    left: 38px;
+    top: 68px;
+    left: 42px;
 }
 
 .xbox .a.pressed {
@@ -159,9 +159,9 @@
 }
 
 .xbox .b {
-    background-position: -37px 0;
-    top: 28px;
-    right: -2px;
+    background-position: -37px 0;  
+    top: 34px;
+    right: 0px;
 }
 
 .xbox .b.pressed {
@@ -170,8 +170,8 @@
 
 .xbox .x {
     background-position: -74px 0;
-    top: 28px;
-    left: 0px;
+    top: 34px;
+    left: 4px;
 }
 
 .xbox .x.pressed {
@@ -180,8 +180,8 @@
 
 .xbox .y {
     background-position: 36px 0;
-    left: 38px;
-    top: -4px;
+    left: 42px;
+    top: 0px;
 }
 
 .xbox .y.pressed {
